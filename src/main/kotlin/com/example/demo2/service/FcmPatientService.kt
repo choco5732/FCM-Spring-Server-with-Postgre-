@@ -24,8 +24,25 @@ class FcmPatientService(
         val target = fcmPatientRepository.findById(patientId)
                 .orElseThrow { EntityNotFoundException("타겟 스캔 실패: $patientId")}
 
-        target.start_time = LocalDateTime.now()
+        target.start_time = System.currentTimeMillis()
 
+        return fcmPatientRepository.save(target)
+    }
+
+    fun updateIsEnd(patientId: Long, isEnd: Boolean): FcmPatient {
+        val target = fcmPatientRepository.findById(patientId)
+                .orElseThrow { EntityNotFoundException("타겟 스캔 실패: $patientId")}
+
+        target.isend = isEnd
+        return fcmPatientRepository.save(target)
+
+    }
+
+    fun updateIsEndFalse(patientId: Long): FcmPatient {
+        val target = fcmPatientRepository.findById(patientId)
+                .orElseThrow { EntityNotFoundException("타겟 스캔 실패: $patientId")}
+
+        target.isend = false
         return fcmPatientRepository.save(target)
     }
 }

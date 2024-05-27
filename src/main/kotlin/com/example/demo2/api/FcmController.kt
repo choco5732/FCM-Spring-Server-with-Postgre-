@@ -9,7 +9,6 @@ import java.time.LocalDateTime
 @RestController
 class FcmController (
         private val fcmPatientService: FcmPatientService
-
 ){
 //    @GetMapping("/test")
 //    fun testApiMethod(): String {
@@ -44,5 +43,15 @@ class FcmController (
     @PutMapping("/startTime")
     fun updateStartTime(@RequestParam id: Long) : FcmPatient {
         return fcmPatientService.updateStartTime(id)
+    }
+
+    @PutMapping("/isEnd")
+    fun updateIsEnd(@RequestParam id: Long, @RequestParam isEnd: Boolean) : FcmPatient {
+        return fcmPatientService.updateIsEnd(id, isEnd)
+    }
+
+    @PutMapping("/isEndFalse")
+    fun updateIsEndFalse(@RequestParam id: Long) : FcmPatient {
+        return fcmPatientService.updateIsEndFalse(id)
     }
 }
